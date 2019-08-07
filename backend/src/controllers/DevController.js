@@ -1,4 +1,5 @@
-const axios = require('axios');
+//const axios = require('axios');
+const axios = require('axios-https-proxy-fix');
 const Dev = require('../models/Dev');
 
 module.exports={
@@ -27,7 +28,12 @@ module.exports={
             return res.json(userExists);
         }
         
-        const response = await axios.get(`https://api.github.com/users/${username}`);
+        const response = await axios.get(`https://api.github.com/users/${username}`,{
+            proxy:{
+                host:'10.0.0.30',
+                port: 3128
+            }
+        });
 
         const { name, bio, avatar_url: avatar } = response.data;
 
