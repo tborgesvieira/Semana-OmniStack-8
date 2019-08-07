@@ -1,10 +1,18 @@
 const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
 const routes = require('./routes');
 
 const server = new express();
 
-server.use(express.json());
+mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0-dxvwu.mongodb.net/omnistack8?retryWrites=true&w=majority',
+{
+    useNewUrlParser: true 
+});
 
+
+server.use(cors());
+server.use(express.json());
 server.use(routes);
 
 server.listen(3333);
